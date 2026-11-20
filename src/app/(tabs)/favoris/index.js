@@ -1,17 +1,23 @@
-import { FlatList, StyleSheet, Text } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Chargement, Erreur, Vide } from "../../../components/EtatsReseau";
 import { FilmsCard } from "../../../components/FilmsCard";
-import { films } from "../../../data/films";
+import { useFilms } from "../../../hooks/useFilms";
 import { useFavorisStore } from "../../../store/useFavorisStore";
 
 export default function FavorisScreen() {
   const favorisIds = useFavorisStore((s) => s.favorisIds);
+  const { statut, films, erreur, recharger } = useFilms();
+
+  if (statut === "chargement") return <Chargement />;
+  if (statut === "erreur")
+    return <Erreur message={erreur} onReessayer={recharger} />;
   const favoris = films.filter((l) => favorisIds.includes(l.id));
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
       {favoris.length === 0 ? (
-        <Text>Aucun favori. Touchez le cœur d’un film dans Explorer.</Text>
+        <Vide message="Aucun favori. Touchez le cœur d’un film dans l'Accueil." />
       ) : (
         <FlatList
           data={favoris}

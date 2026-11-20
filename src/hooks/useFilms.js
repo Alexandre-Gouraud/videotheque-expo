@@ -34,4 +34,11 @@ export function useFilms() {
       ignore = true; // la réponse d'un ancien chargement sera ignorée
     };
   }, [essai]);
+
+  function recharger() {
+    setEtat({ statut: "chargement", films: [], erreur: null }); // l'erreur disparaît ici
+    setEssai((n) => n + 1);
+  }
+
+  return { ...etat, recharger };
 }

@@ -1,18 +1,22 @@
-import { Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { FilmsCard } from "../../../components/FilmsCard.js";
-import { films } from "../../../data/films.js";
+import { Stack, useLocalSearchParams } from "expo-router";
+import { Chargement, Erreur, Vide } from "../../../components/EtatsReseau";
+import { FilmsDetail } from "../../../components/FilmsDetail.js";
+import { useFilm } from "../../../hooks/useFilm.js";
 
-export default function FilmDetail() {
+export default function FilmDetailScreen() {
   const { id } = useLocalSearchParams();
-  const film = films.find((f) => f.id === id);
+  const { statut, film, erreur, recharger } = useFilm(id);
 
-  if (!film) return <Text>Film introuvable</Text>;
+  if (statut === "chargement") return <Chargement />;
+  if (statut === "introuvable") return <Vide message="Film introuvable." />;
+  if (statut === "erreur")
+    return <Erreur message={erreur} onReessayer={recharger} />;
 
   return (
-    <View>
-      <FilmsCard film={film} />
-      <Text>{film.synopsis}</Text>
-    </View>
+    <>
+      {/* Le titre de l'en-tête devient le titre du film */}
+      <Stack.Title>{film.titre}</Stack.Title>
+      <FilmsDetail film={film} />
+    </>
   );
 }

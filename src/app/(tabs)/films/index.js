@@ -1,17 +1,20 @@
-import { Text, View, StyleSheet } from "react-native";
+import { FlatList, Pressable } from "react-native";
+import { Link } from "expo-router";
+import { FilmsCard } from "../../../components/FilmsCard.js";
+import { films } from "../../../data/films.js";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-    </View>
+    <FlatList
+      data={films}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <Link href={`/films/${item.id}`} asChild>
+          <Pressable>
+            <FilmsCard film={item} />
+          </Pressable>
+        </Link>
+      )}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

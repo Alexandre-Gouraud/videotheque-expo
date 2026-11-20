@@ -4,6 +4,7 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ title: "Favoris" }} />
+      <Stack.Screen name="[id]" options={{ title: "Film" }} />
     </Stack>
   );
 }

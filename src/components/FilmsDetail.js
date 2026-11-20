@@ -16,7 +16,11 @@ export function FilmsDetail({ film }) {
         <Text style={styles.synopsis}>{film.synopsis}</Text>
       </View>
       <View style={styles.bloc}>
-        <Button title="Retour" onPress={() => router.navigate("/")} />
+        {/* Revient à l'écran précédent (Accueil ou Favoris selon l'onglet) */}
+        <Button
+          title="Retour"
+          onPress={() => (router.canGoBack() ? router.back() : router.navigate("/"))}
+        />
       </View>
     </ScrollView>
   );

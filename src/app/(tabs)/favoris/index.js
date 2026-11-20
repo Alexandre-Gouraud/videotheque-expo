@@ -1,4 +1,5 @@
-import { FlatList, StyleSheet } from "react-native";
+import { Link } from "expo-router";
+import { FlatList, Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Chargement, Erreur, Vide } from "../../../components/EtatsReseau";
 import { FilmsCard } from "../../../components/FilmsCard";
@@ -23,7 +24,13 @@ export default function FavorisScreen() {
           data={favoris}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ padding: 16 }}
-          renderItem={({ item }) => <FilmsCard film={item} />}
+          renderItem={({ item }) => (
+            <Link href={`/favoris/${item.id}`} asChild>
+              <Pressable>
+                <FilmsCard film={item} />
+              </Pressable>
+            </Link>
+          )}
         />
       )}
     </SafeAreaView>

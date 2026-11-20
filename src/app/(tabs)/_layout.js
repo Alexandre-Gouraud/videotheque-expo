@@ -11,10 +11,6 @@ export default function TabsLayout() {
         <NativeTabs.Trigger.Label>Favoris</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="heart" md="favorite" />
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="avis">
-        <NativeTabs.Trigger.Label>Avis</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="person" md="person" />
-      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }

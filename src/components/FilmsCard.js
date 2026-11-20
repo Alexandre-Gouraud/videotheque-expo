@@ -12,10 +12,17 @@ export function FilmsCard({ film }) {
         <Image source={{ uri: film.image }} style={styles.image} />
       ) : (
         <View style={[styles.image, styles.noImage]}>
-          <Text>{"Pas d'affiche"}</Text>
+          <Text style={styles.noImageText}>{"Pas d'affiche"}</Text>
         </View>
       )}
-      <Text style={styles.title}>{film.titre}</Text>
+      <View style={styles.infos}>
+        <Text style={styles.title} numberOfLines={2}>
+          {film.titre}
+        </Text>
+        <Text style={styles.meta}>
+          {film.categorie} · {film.annee} · {film.duree} min
+        </Text>
+      </View>
       <Pressable
         onPress={(e) => {
           e.preventDefault();
@@ -32,33 +39,53 @@ export function FilmsCard({ film }) {
           color={estFavori ? "#FF5A5F" : "#222"}
         />
       </Pressable>
-      <Text>
-        {film.categorie} · {film.annee} · {film.duree} min
-      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
     marginBottom: 12,
-    borderRadius: 8,
+    borderRadius: 12,
     backgroundColor: "#fff",
   },
   image: {
-    width: 320,
-    height: 180,
+    width: 140,
+    height: 80,
     borderRadius: 8,
-    marginBottom: 8,
   },
   noImage: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#e5e5e5",
     alignItems: "center",
     justifyContent: "center",
   },
+  noImageText: {
+    color: "#888",
+  },
+  pastille: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#f2f2f2",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  infos: {
+    flex: 1,
+    gap: 6,
+  },
   title: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 17,
+    color: "#111",
+  },
+  meta: {
+    fontSize: 13,
+    color: "#666",
   },
 });

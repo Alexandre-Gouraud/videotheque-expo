@@ -16,7 +16,11 @@ export function FilmsCard({ film }) {
       )}
       <Text style={styles.title}>{film.titre}</Text>
       <Pressable
-        onPress={() => toggleFavori(film.id)}
+        onPress={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFavori(film.id);
+        }}
         hitSlop={10}
         style={styles.pastille}
         accessibilityRole="button"

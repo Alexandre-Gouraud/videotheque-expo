@@ -1,5 +1,6 @@
-import { StyleSheet, Text } from "react-native";
+import { FlatList, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FilmsCard } from "../../../components/FilmsCard";
 import { films } from "../../../data/films";
 import { useFavorisStore } from "../../../store/useFavorisStore";
 
@@ -9,24 +10,16 @@ export default function FavorisScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-      {
-        !favoris.length === 0 ?? (
-          <Text message="Aucun favori. Touchez le cœur d’un film dans Explorer." />
-        )
-
-        // <FlatList
-        //   data={favoris}
-        //   keyExtractor={(item) => item.id}
-        //   contentContainerStyle={{ padding: 16 }}
-        //   renderItem={({ item }) => (
-        //     <Link href={`/logements/${item.id}`} asChild>
-        //       <Pressable>
-        //         <LogementCard logement={item} />
-        //       </Pressable>
-        //     </Link>
-        //   )}
-        // />
-      }
+      {favoris.length === 0 ? (
+        <Text>Aucun favori. Touchez le cœur d’un film dans Explorer.</Text>
+      ) : (
+        <FlatList
+          data={favoris}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{ padding: 16 }}
+          renderItem={({ item }) => <FilmsCard film={item} />}
+        />
+      )}
     </SafeAreaView>
   );
 }

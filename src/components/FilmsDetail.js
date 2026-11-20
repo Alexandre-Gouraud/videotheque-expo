@@ -1,4 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import { FilmsCard } from "./FilmsCard.js";
 
 // Composant d'affichage : reçoit un film déjà chargé et affiche sa fiche complète
@@ -6,15 +7,16 @@ export function FilmsDetail({ film }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <FilmsCard film={film} />
-
       <View style={styles.bloc}>
         <Text style={styles.label}>Réalisation</Text>
         <Text style={styles.valeur}>{film.realisateur}</Text>
       </View>
-
       <View style={styles.bloc}>
         <Text style={styles.label}>Synopsis</Text>
         <Text style={styles.synopsis}>{film.synopsis}</Text>
+      </View>
+      <View style={styles.bloc}>
+        <Button title="Retour" onPress={() => router.navigate("/")} />
       </View>
     </ScrollView>
   );

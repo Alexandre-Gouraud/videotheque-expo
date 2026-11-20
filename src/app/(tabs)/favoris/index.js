@@ -1,5 +1,5 @@
-import { Link } from "expo-router";
-import { FlatList, Pressable, StyleSheet } from "react-native";
+import { Link, router } from "expo-router";
+import { Button, FlatList, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Chargement, Erreur, Vide } from "../../../components/EtatsReseau";
 import { FilmsCard } from "../../../components/FilmsCard";
@@ -33,6 +33,13 @@ export default function FavorisScreen() {
           )}
         />
       )}
+      <View style={styles.bloc}>
+        {/* Revient à l'écran précédent (Accueil ou Favoris selon l'onglet) */}
+        <Button
+          title="Retour"
+          onPress={() => (router.canGoBack() ? router.back() : router.navigate("/"))}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -42,5 +49,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  bloc: {
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    gap: 4,
   },
 });

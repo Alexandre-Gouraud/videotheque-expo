@@ -1,6 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useFavorisStore } from "../store/useFavorisStore";
 
 export function FilmsCard({ film }) {
+  const estFavori = useFavorisStore((s) => s.favorisIds.includes(film.id));
+  const toggleFavori = useFavorisStore((s) => s.toggleFavori);
   return (
     <View style={styles.container}>
       {film.image ? (
@@ -11,6 +15,18 @@ export function FilmsCard({ film }) {
         </View>
       )}
       <Text style={styles.title}>{film.titre}</Text>
+      <Pressable
+        onPress={() => toggleFavori(film.id)}
+        hitSlop={10}
+        style={styles.pastille}
+        accessibilityRole="button"
+      >
+        <Ionicons
+          name={estFavori ? "heart" : "heart-outline"}
+          size={22}
+          color={estFavori ? "#FF5A5F" : "#222"}
+        />
+      </Pressable>
       <Text>
         {film.categorie} · {film.annee} · {film.duree} min
       </Text>

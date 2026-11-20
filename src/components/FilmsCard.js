@@ -5,6 +5,7 @@ import { useFavorisStore } from "../store/useFavorisStore";
 export function FilmsCard({ film }) {
   const estFavori = useFavorisStore((s) => s.favorisIds.includes(film.id));
   const toggleFavori = useFavorisStore((s) => s.toggleFavori);
+
   return (
     <View style={styles.container}>
       {film.image ? (

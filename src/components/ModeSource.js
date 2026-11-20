@@ -1,12 +1,20 @@
 // Pour la démo : choisir le cas de la source simulée, puis recharger.
+import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { MODES, choisirMode, modeActuel } from "../api/films";
 
-export default function ModeSource({ onChange }) {
-  const mode = modeActuel(); // relu à chaque rendu (l'erreur 500 revient seule à « succes »)
+export default function ModeSource({ statut, onChange }) {
+  const [mode, setMode] = useState(modeActuel());
+  const [statutPrecedent, setStatutPrecedent] = useState(statut);
+
+  if (statut !== statutPrecedent) {
+    setStatutPrecedent(statut);
+    setMode(modeActuel());
+  }
 
   function choisir(m) {
     choisirMode(m);
+    setMode(m);
     onChange();
   }
 

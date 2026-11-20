@@ -36,7 +36,7 @@ export default function HomeScreen() {
       ListEmptyComponent={etatSansListe()}
       ListHeaderComponent={
         <View>
-          <ModeSource onChange={recharger} />
+          <ModeSource statut={statut} onChange={recharger} />
           <View style={styles.ligne}>
             {OPTIONS.map((c) => (
               <Pressable
